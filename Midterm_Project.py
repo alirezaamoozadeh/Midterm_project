@@ -99,13 +99,15 @@ class Filesystem:
 
     def mkdir(self,new_folder):
         self.current_folder.make_folder(new_folder)
-
-    def rm(self,folder_name):
-        if self.current_folder.get_folder_by_name(folder_name) is None:
-            print('in folder ro nadarim!')
+        
+    def rm(self, name):
+        if self.current_folder.get_folder_by_name(name):
+            self.current_folder.delete_folder(name)
+        elif self.current_folder.get_file_by_name(name):
+            self.current_folder.delete_file(name)
         else:
-            self.current_folder.delete_folder(self.current_folder.get_folder_by_name(folder_name))
-
+            print("file ya folder ba in name vojood nadarad!")
+            
     def ls(self):
         for item in self.current_folder.get_file_and_folder():
             print(item.name)
